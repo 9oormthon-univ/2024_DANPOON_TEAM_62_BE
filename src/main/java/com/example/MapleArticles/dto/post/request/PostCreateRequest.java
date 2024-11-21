@@ -1,14 +1,17 @@
 package com.example.MapleArticles.dto.post.request;
 
-import com.example.MapleArticles.domain.user.User;
-
 public class PostCreateRequest {
     private String title;
     private String content;
-    private User user;
+    private long userId;
     private String category;
-    private long likes;
-    private long views;
+
+    public PostCreateRequest(String title, String content, long userId, String category) {
+        this.title = title;
+        this.content = content;
+        this.userId = userId;
+        this.category = category;
+    }
 
     public String getTitle() {
         return title;
@@ -18,19 +21,11 @@ public class PostCreateRequest {
         return content;
     }
 
-    public User getUser() {
-        return user;
+    public long getUserId() {
+        return userId;
     }
 
     public String getCategory() {
         return category;
-    }
-
-    public long getLikes() {
-        return likes;
-    }
-
-    public long getViews() {
-        return views;
     }
 }

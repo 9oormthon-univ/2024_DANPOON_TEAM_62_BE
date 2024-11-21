@@ -32,7 +32,7 @@ public class PostController {
     }
 
     @DeleteMapping("/post")
-    public void deletePost(@RequestParam String title) {
-        postService.deletePost(title);
+    public void deletePost(@RequestParam Long id) {
+        postService.deletePost(id);
     }
 }

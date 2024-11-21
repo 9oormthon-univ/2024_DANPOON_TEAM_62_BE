@@ -14,13 +14,16 @@ public class User {
 
     private String name;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Post> userPosts = new ArrayList<>();
+    //private List<Post> userPosts = new ArrayList<>();
 
     protected User() {}
 
     public User(String name) {
         this.name = name;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getName() {

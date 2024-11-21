@@ -7,16 +7,16 @@ public class PostResponse {
     private long id;
     private String title;
     private String content;
-    private User user;
+    private long userId;
     private String category;
     private long likes;
     private long views;
 
-    public PostResponse(long id, String title, String content, User user, String category, long likes, long views) {
+    public PostResponse(long id, String title, String content, long userId, String category, long likes, long views) {
         this.id = id;
         this.title = title;
         this.content = content;
-        this.user = user;
+        this.userId = userId;
         this.category = category;
         this.likes = likes;
         this.views = views;
@@ -26,7 +26,7 @@ public class PostResponse {
         this.id = post.getId();
         this.title = post.getTitle();
         this.content = post.getContent();
-        this.user = post.getUser();
+        this.userId = post.getUserId();
         this.category = post.getCategory();
         this.likes = post.getLikes();
         this.views = post.getViews();
@@ -36,7 +36,7 @@ public class PostResponse {
         this.id = id;
         this.title = post.getTitle();
         this.content = post.getContent();
-        this.user = post.getUser();
+        this.userId = post.getUserId();
         this.category = post.getCategory();
         this.likes = post.getLikes();
         this.views = post.getViews();
