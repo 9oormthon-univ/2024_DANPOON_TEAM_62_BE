@@ -2,9 +2,13 @@ package com.example.MapleArticles.service.post;
 
 import com.example.MapleArticles.domain.post.Post;
 import com.example.MapleArticles.domain.post.PostRepository;
+import com.example.MapleArticles.domain.user.User;
+import com.example.MapleArticles.domain.user.UserRepository;
 import com.example.MapleArticles.dto.post.request.PostCreateRequest;
 import com.example.MapleArticles.dto.post.request.PostUpdateRequest;
 import com.example.MapleArticles.dto.post.response.PostResponse;
+import com.example.MapleArticles.repository.post.PostJdbcRepository;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,9 +19,13 @@ import java.util.stream.Collectors;
 public class PostService {
 
     private final PostRepository postRepository;
+    private final UserRepository userRepository;
+    private final PostJdbcRepository postJdbcRepository;
 
-    public PostService(PostRepository postRepository) {
+    public PostService(PostRepository postRepository, UserRepository userRepository, @Qualifier("postJdbcRepository") PostJdbcRepository postJdbcRepository) {
         this.postRepository = postRepository;
+        this.userRepository = userRepository;
+        this.postJdbcRepository = postJdbcRepository;
     }
 
 
@@ -25,7 +33,9 @@ public class PostService {
     @Transactional
     public void savePost(PostCreateRequest request) {
         Post post = postRepository.save(new Post(request.getTitle(), request.getContent(),
-                request.getUser(), request.getCategory(), request.getLikes(), request.getViews()));
+                request.getUserId(), request.getCategory()));
+
+        //postRepository.save(post);
     }
 
 
@@ -52,35 +62,12 @@ public class PostService {
     }
 
 
-    //게시물 삭제 (게시물 제목으로)
+    //게시물 삭제 (게시물 id로)
     @Transactional
-    public void deletePost(String title) {
-        Post post = postRepository.findByTitle(title)
+    public void deletePost(Long id) {
+        Post post = postRepository.findById(id)
                 .orElseThrow(IllegalArgumentException::new);
 
         postRepository.delete(post);
-    }
-
-    // 핫 게시물 조회
-    @Transactional(readOnly = true)
-    public List<PostResponse> getBestPosts() {
-        return postRepository.findTop3ByOrderByLikesDesc().stream()
-                .map(PostResponse::new)
-                .collect(Collectors.toList());
-    }
-
-    // 최근 게시물 조회
-    @Transactional(readOnly = true)
-    public List<PostResponse> getLatestPosts() {
-        return postRepository.findTop10ByOrderByCreatedAtDesc().stream()
-                .map(PostResponse::new)
-                .collect(Collectors.toList());
-    }
-    // 지역별 게시물 조회
-    public List<PostResponse> getPostsByRegion(String region) {
-        List<Post> posts = postRepository.findByRegion(region);
-        return posts.stream()
-                .map(post -> new PostResponse(post))
-                .collect(Collectors.toList());
     }
 }
