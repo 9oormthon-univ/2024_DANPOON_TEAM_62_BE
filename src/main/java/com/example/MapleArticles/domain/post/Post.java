@@ -15,6 +15,8 @@ public class Post {
     @Column(nullable = false)
     private String content;
 
+    private String region;
+
     @JoinColumn(nullable = false)
     @ManyToOne
     private User user;
