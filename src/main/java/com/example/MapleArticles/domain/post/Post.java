@@ -3,6 +3,8 @@ package com.example.MapleArticles.domain.post;
 import com.example.MapleArticles.domain.user.User;
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 @Entity
 public class Post {
     @Id
@@ -15,19 +17,20 @@ public class Post {
     @Column(nullable = false)
     private String content;
 
-    private String region;
-
+    /*
     @JoinColumn(nullable = false)
     @ManyToOne
     private User user;
+    */
+    private long userId;
 
     private String category;
 
     private long likes;
     private long views;
 
-    private long createdAt;
-    private long updatedAt;
+    private Date createdAt;
+    private Date updatedAt;
 
 
     protected Post() {}
@@ -38,14 +41,14 @@ public class Post {
         this.title = title;
     }
 
-    public Post(String title, String content, User user, String category, long likes, long views) {
+    public Post(String title, String content, long userId, String category) {
         this.title = title;
         this.content = content;
-        this.user = user;
+        this.userId = userId;
         this.category = category;
-        this.likes = likes;
-        this.views = views;
-        this.createdAt = System.currentTimeMillis();
+        this.likes = 0;
+        this.views = 0;
+        this.createdAt = new Date(System.currentTimeMillis());
         this.updatedAt = createdAt;
     }
 
@@ -60,9 +63,15 @@ public class Post {
     public String getContent() {
         return content;
     }
-
+/*
     public User getUser() {
         return user;
+    }
+
+ */
+
+    public long getUserId() {
+        return userId;
     }
 
     public String getCategory() {
@@ -77,22 +86,22 @@ public class Post {
         return views;
     }
 
-    public long getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public long getUpdatedAt() {
+    public Date getUpdatedAt() {
         return updatedAt;
     }
 
     public void updateTitle(String title) {
         this.title = title;
-        this.updatedAt = System.currentTimeMillis();
+        this.updatedAt = new Date(System.currentTimeMillis());
     }
 
     public void updateContent(String content) {
         this.content = content;
-        this.updatedAt = System.currentTimeMillis();
+        this.updatedAt = new Date(System.currentTimeMillis());
     }
 
     public void updateCategory(String category) {
