@@ -4,6 +4,8 @@ import com.example.MapleArticles.dto.post.request.PostCreateRequest;
 import com.example.MapleArticles.dto.post.request.PostUpdateRequest;
 import com.example.MapleArticles.dto.post.response.PostResponse;
 import com.example.MapleArticles.service.post.PostService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,7 +34,24 @@ public class PostController {
     }
 
     @DeleteMapping("/post")
-    public void deletePost(@RequestParam Long id) {
-        postService.deletePost(id);
+
+    public void deletePost(@RequestParam String title) {
+        postService.deletePost(title);
     }
+    @GetMapping("/post/best")
+    public List<PostResponse> getBestPosts() {
+        return postService.getBestPosts();
+    }
+    @GetMapping("/post/latest")
+    public List<PostResponse> getLatestPosts() {
+        return postService.getLatestPosts();
+    }
+
+    @GetMapping("/region/{region}")
+    public ResponseEntity<List<PostResponse>> getPostsByRegion(@PathVariable String region) {
+        List<PostResponse> posts = postService.getPostsByRegion(region);
+        return new ResponseEntity<>(posts, HttpStatus.OK);
+    }
+
 }
+
