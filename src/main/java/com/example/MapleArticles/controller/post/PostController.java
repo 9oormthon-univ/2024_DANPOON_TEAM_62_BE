@@ -19,7 +19,9 @@ public class PostController {
 
     @PostMapping("/post")
     public void savePost(@RequestBody PostCreateRequest request) {
+        //test
         System.out.println("Request received: " + request);
+
         postService.savePost(request);
     }
 
