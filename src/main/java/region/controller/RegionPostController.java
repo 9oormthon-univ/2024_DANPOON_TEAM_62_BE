@@ -28,15 +28,21 @@ public class RegionPostController {
 
     // 게시물 수정
     @PutMapping("/{region}/{postId}")
-    public ResponseEntity<Void> updatePost(@PathVariable String region, @PathVariable Long postId, @RequestBody PostUpdateRequest request) {
+    public ResponseEntity<Void> updatePost(@PathVariable String region,
+                                           @PathVariable Long postId,
+                                           @RequestBody PostUpdateRequest request
+                                           ) {
         postService.updatePost(region, postId, request);
         return ResponseEntity.ok().build();
     }
 
-    // 게시물 삭제
+    // 게시물 삭제 (사용자 검증 추가)
     @DeleteMapping("/{region}/{postId}")
-    public ResponseEntity<Void> deletePost(@PathVariable String region, @PathVariable Long postId) {
-        postService.deletePost(region, postId);
+    public ResponseEntity<Void> deletePost(@PathVariable String region,
+                                           @PathVariable Long postId,
+                                           @RequestBody PostUpdateRequest request
+                                           ) {
+        postService.deletePost(region, postId, request);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 

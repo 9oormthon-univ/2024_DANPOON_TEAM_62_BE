@@ -74,6 +74,9 @@ public class Post {
             this.likes--;
         }
     }
+    public Long getUserId() {
+        return userId;
+    }
 
     // 조회수 증가 메서드
     public void incrementViews() {

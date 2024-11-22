@@ -29,7 +29,7 @@ public class PostService {
     // 좋아요 추가
     public void likePost(Long postId) {
         Post post = postRepository.findById(postId)
-                .orElseThrow(() -> new RuntimeException("Post not found"));
+                .orElseThrow(() -> new RuntimeException("게시물을 찾을 수 없습니다."));
 
         post.incrementLikes(); // 좋아요 수 증가
         postRepository.save(post); // 게시물 DB에 좋아요 수 반영
@@ -38,7 +38,7 @@ public class PostService {
     // 조회수 증가
     public void viewPost(Long postId) {
         Post post = postRepository.findById(postId)
-                .orElseThrow(() -> new RuntimeException("Post not found"));
+                .orElseThrow(() -> new RuntimeException("게시물을 찾을 수 없습니다."));
 
         post.incrementViews(); // 조회수 증가
         postRepository.save(post); // 게시물 DB에 조회수 반영
@@ -47,19 +47,32 @@ public class PostService {
     // 게시물 수정
     public void updatePost(String region, Long postId, PostUpdateRequest request) {
         Post post = postRepository.findById(postId)
-                .orElseThrow(() -> new RuntimeException("Post not found"));
+                .orElseThrow(() -> new IllegalArgumentException("게시물을 찾을 수 없습니다."));
 
+        // 권한 확인
+        if (!post.getUserId().equals(request.getUserId())) {
+            throw new RuntimeException("수정 권한이 없습니다.");
+        }
+
+
+        // 권한이 있으면 수정
         post.setTitle(request.getTitle());
         post.setContent(request.getContent());
-        post.setUpdatedAt(LocalDateTime.now());
-        postRepository.save(post); // 수정된 게시물 DB에 저장
+        postRepository.save(post);
     }
 
     // 게시물 삭제
-    public void deletePost(String region, Long postId) {
+    public void deletePost(String region, Long postId, PostUpdateRequest request) {
         Post post = postRepository.findById(postId)
-                .orElseThrow(() -> new RuntimeException("Post not found"));
-        postRepository.delete(post); // DB에서 게시물 삭제
+                .orElseThrow(() -> new IllegalArgumentException("게시물을 찾을 수 없습니다."));
+
+        // 권한 확인
+        if (!post.getUserId().equals(request.getUserId())) {
+            throw new SecurityException("이 게시물은 삭제할 권한이 없습니다.");
+        }
+
+        // 권한이 있으면 삭제
+        postRepository.delete(post);
     }
 
     // 특정 지역의 게시물 조회
