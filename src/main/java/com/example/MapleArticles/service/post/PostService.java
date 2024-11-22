@@ -70,4 +70,18 @@ public class PostService {
 
         postRepository.delete(post);
     }
+    @Transactional(readOnly = true)
+    public List<PostResponse> getBestPosts() {
+        return postRepository.findTop3ByOrderByLikesDesc().stream()
+                .map(PostResponse::new)
+                .collect(Collectors.toList());
+    }
+    // 최근 게시물 조회
+    @Transactional(readOnly = true)
+    public List<PostResponse> getLatestPosts() {
+        return postRepository.findTop10ByOrderByCreatedAtDesc().stream()
+                .map(PostResponse::new)
+                .collect(Collectors.toList());
+    }
+
 }

@@ -35,4 +35,13 @@ public class PostController {
     public void deletePost(@RequestParam Long id) {
         postService.deletePost(id);
     }
+
+    @GetMapping("/post/best")
+    public List<PostResponse> getBestPosts() {
+        return postService.getBestPosts();
+    }
+    @GetMapping("/post/latest")
+    public List<PostResponse> getLatestPosts() {
+        return postService.getLatestPosts();
+    }
 }
