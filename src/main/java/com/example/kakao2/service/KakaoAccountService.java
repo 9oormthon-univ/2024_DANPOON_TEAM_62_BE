@@ -1,4 +1,4 @@
-package com.example.kakao.service;
+package com.example.kakao2.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;

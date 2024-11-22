@@ -1,6 +1,6 @@
-package com.example.kakao.controller;
+package com.example.kakao2.controller;
 
-import com.example.kakao.service.KakaoLoginService;
+import com.example.kakao2.service.KakaoLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

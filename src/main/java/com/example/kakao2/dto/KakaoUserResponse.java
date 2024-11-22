@@ -1,4 +1,4 @@
-package com.example.kakao.dto;
+package com.example.kakao2.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

@@ -1,9 +1,9 @@
-package com.example.kakao.token;
+package com.example.kakao2.token;
 
-import com.example.kakao.domain.KakaoProperties;
-import com.example.kakao.dto.KakaoTokenResponse;
-import com.example.kakao.dto.KakaoUserResponse;
-import com.example.kakao.exception.CustomException;
+import com.example.kakao2.domain.KakaoProperties;
+import com.example.kakao2.dto.KakaoTokenResponse;
+import com.example.kakao2.dto.KakaoUserResponse;
+import com.example.kakao2.exception.CustomException;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;

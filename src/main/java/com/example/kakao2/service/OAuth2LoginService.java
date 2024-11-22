@@ -1,9 +1,9 @@
-package com.example.kakao.service;
+package com.example.kakao2.service;
 
 
-import com.example.kakao.domain.Users;
-import com.example.kakao.dto.KakaoUserResponse;
-import com.example.kakao.platform.Platform;
+import com.example.kakao2.domain.Users;
+import com.example.kakao2.dto.KakaoUserResponse;
+import com.example.kakao2.platform.Platform;
 
 public interface OAuth2LoginService {
     Platform supports();

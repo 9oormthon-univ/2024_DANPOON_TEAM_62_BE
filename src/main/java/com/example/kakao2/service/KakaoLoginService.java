@@ -1,11 +1,11 @@
-package com.example.kakao.service;
+package com.example.kakao2.service;
 
-import com.example.kakao.domain.KakaoProperties;
-import com.example.kakao.domain.Users;
-import com.example.kakao.dto.KakaoTokenResponse;
-import com.example.kakao.dto.KakaoUserResponse;
-import com.example.kakao.exception.CustomException;
-import com.example.kakao.platform.Platform;
+import com.example.kakao2.domain.KakaoProperties;
+import com.example.kakao2.domain.Users;
+import com.example.kakao2.dto.KakaoTokenResponse;
+import com.example.kakao2.dto.KakaoUserResponse;
+import com.example.kakao2.exception.CustomException;
+import com.example.kakao2.platform.Platform;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;

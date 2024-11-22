@@ -1,4 +1,4 @@
-package com.example.kakao.controller;
+package com.example.kakao2.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,12 +1,13 @@
-package com.example.kakao;
+package com.example.kakao2;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
-public class Kakao2Application {
 
+@SpringBootApplication
+public class KakaoApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(Kakao2Application.class, args);
+		SpringApplication.run(KakaoApplication.class, args);
 	}
 }
+

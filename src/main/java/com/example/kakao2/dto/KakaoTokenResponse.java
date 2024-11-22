@@ -1,4 +1,4 @@
-package com.example.kakao.dto;
+package com.example.kakao2.dto;
 
 public class KakaoTokenResponse {
     private String accessToken;

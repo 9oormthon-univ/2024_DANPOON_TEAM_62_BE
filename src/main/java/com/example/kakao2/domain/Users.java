@@ -1,4 +1,4 @@
-package com.example.kakao.domain;
+package com.example.kakao2.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

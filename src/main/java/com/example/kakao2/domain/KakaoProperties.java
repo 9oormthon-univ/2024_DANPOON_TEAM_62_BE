@@ -1,10 +1,10 @@
-package com.example.kakao.domain;
+package com.example.kakao2.domain;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties(prefix = "com/example/kakao")
+@ConfigurationProperties(prefix = "com/example/kakao2")
 public class KakaoProperties {
     private String grantType;
     private String clientId;

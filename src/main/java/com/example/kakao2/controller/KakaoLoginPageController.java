@@ -1,4 +1,4 @@
-package com.example.kakao.controller;
+package com.example.kakao2.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/login")
 public class KakaoLoginPageController {
 
-    @Value("${kakao.client_id}")
+    @Value("${kakao2.client_id}")
     private String client_id;
 
-    @Value("${kakao.redirect_uri}")
+    @Value("${kakao2.redirect_uri}")
     private String redirect_uri;
 
     @GetMapping("/page")
