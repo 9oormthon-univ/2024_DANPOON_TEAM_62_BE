@@ -28,7 +28,7 @@ spring:
   datasource:
     url: "jdbc:mysql://localhost/article"
     username: "root"
-    password: "!vitamin6953"
+    password: ""
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
