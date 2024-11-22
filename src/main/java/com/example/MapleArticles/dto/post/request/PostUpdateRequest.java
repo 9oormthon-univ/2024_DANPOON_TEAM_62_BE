@@ -10,9 +10,7 @@ public class PostUpdateRequest {
         return id;
     }
 
-    public String getTitle() {
-        return title;
-    }
+    public String getTitle() { return title; }
 
     public String getContent() {
         return content;
@@ -21,4 +19,6 @@ public class PostUpdateRequest {
     public String getCategory() {
         return category;
     }
+
+
 }

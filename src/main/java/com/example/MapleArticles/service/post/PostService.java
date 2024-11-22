@@ -32,10 +32,19 @@ public class PostService {
     //게시물 생성
     @Transactional
     public void savePost(PostCreateRequest request) {
-        Post post = postRepository.save(new Post(request.getTitle(), request.getContent(),
-                request.getUserId(), request.getCategory()));
+        //Post post = postRepository.save(new Post(request.getTitle(), request.getContent(),
+        //        request.getUserId(), request.getCategory()));
 
         //postRepository.save(post);
+
+        Post post = new Post(
+                request.getTitle(),
+                request.getContent(),
+                request.getUserId(),
+                request.getCategory()
+        );
+        System.out.println("Mapped Post object: " + post);
+        postRepository.save(post);
     }
 
 
@@ -57,6 +66,7 @@ public class PostService {
         post.updateTitle(request.getTitle());
         post.updateContent(request.getContent());
         post.updateCategory(request.getCategory());
+        post.updateUpadatedAt();
 
         postRepository.save(post);
     }

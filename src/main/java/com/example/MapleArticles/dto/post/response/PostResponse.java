@@ -41,4 +41,33 @@ public class PostResponse {
         this.likes = post.getLikes();
         this.views = post.getViews();
     }
+
+
+    public long getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public long getLikes() {
+        return likes;
+    }
+
+    public long getViews() {
+        return views;
+    }
 }

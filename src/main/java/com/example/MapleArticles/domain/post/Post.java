@@ -2,10 +2,14 @@ package com.example.MapleArticles.domain.post;
 
 import com.example.MapleArticles.domain.user.User;
 import jakarta.persistence.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Date;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +33,12 @@ public class Post {
     private long likes;
     private long views;
 
+    @CreatedDate
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
+
+    @LastModifiedDate
+    @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
 
@@ -107,4 +116,26 @@ public class Post {
     public void updateCategory(String category) {
         this.category = category;
     }
+
+    public void updateUpadatedAt () {
+        this.updatedAt = new Date(System.currentTimeMillis());
+    }
+
+
+    //test
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", userId=" + userId +
+                ", category='" + category + '\'' +
+                ", likes=" + likes +
+                ", views=" + views +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
+    }
+
 }

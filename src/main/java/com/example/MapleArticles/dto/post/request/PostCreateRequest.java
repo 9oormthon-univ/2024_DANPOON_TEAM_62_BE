@@ -28,4 +28,15 @@ public class PostCreateRequest {
     public String getCategory() {
         return category;
     }
+
+    @Override
+    public String toString() {
+        return "PostCreateRequest{" +
+                "title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", userId=" + userId +
+                ", category='" + category + '\'' +
+                '}';
+    }
+
 }

@@ -4,6 +4,7 @@ import com.example.MapleArticles.dto.post.request.PostCreateRequest;
 import com.example.MapleArticles.dto.post.request.PostUpdateRequest;
 import com.example.MapleArticles.dto.post.response.PostResponse;
 import com.example.MapleArticles.service.post.PostService;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class PostController {
 
     @PostMapping("/post")
     public void savePost(@RequestBody PostCreateRequest request) {
+        System.out.println("Request received: " + request);
         postService.savePost(request);
     }
 
