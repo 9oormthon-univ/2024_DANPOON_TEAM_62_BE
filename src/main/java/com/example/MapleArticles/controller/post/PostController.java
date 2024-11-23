@@ -4,6 +4,7 @@ import com.example.MapleArticles.dto.post.request.PostCreateRequest;
 import com.example.MapleArticles.dto.post.request.PostUpdateRequest;
 import com.example.MapleArticles.dto.post.response.PostResponse;
 import com.example.MapleArticles.service.post.PostService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +24,11 @@ public class PostController {
         System.out.println("Request received: " + request);
 
         postService.savePost(request);
+    }
+
+    @PostMapping("/post/{postId}/like")
+    public void likePost(@PathVariable Long postId) {
+        postService.likePost(postId);
     }
 
     @GetMapping("/post")

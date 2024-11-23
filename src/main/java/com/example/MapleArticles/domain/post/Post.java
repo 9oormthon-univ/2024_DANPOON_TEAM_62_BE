@@ -129,6 +129,18 @@ public class Post {
         this.updatedAt = new Date(System.currentTimeMillis());
     }
 
+    // 좋아요 증가 메서드
+    public void incrementLikes() {
+        this.likes++;
+    }
+
+    // 좋아요 감소 메서드
+    public void decrementLikes() {
+        if (this.likes > 0) {
+            this.likes--;
+        }
+    }
+
 
     //test
     @Override

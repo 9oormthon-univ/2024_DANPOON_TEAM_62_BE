@@ -1,7 +1,11 @@
 package com.example.MapleArticles.dto.post.response;
 
 import com.example.MapleArticles.domain.post.Post;
+import com.example.MapleArticles.domain.post.PostPicture;
 import com.example.MapleArticles.domain.user.User;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PostResponse {
     private long id;
@@ -11,6 +15,7 @@ public class PostResponse {
     private String category;
     private long likes;
     private long views;
+    private List<PostPicture> pictures = new ArrayList<>();
 
     public PostResponse(long id, String title, String content, long userId, String category, long likes, long views) {
         this.id = id;
@@ -30,6 +35,7 @@ public class PostResponse {
         this.category = post.getCategory();
         this.likes = post.getLikes();
         this.views = post.getViews();
+        this.pictures = post.getPictures();
     }
 
     public PostResponse(long id, Post post) {

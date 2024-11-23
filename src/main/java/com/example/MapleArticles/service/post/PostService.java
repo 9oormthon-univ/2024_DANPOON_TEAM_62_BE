@@ -73,6 +73,8 @@ public class PostService {
                 .collect(Collectors.toList());
     }
 
+
+    //게시물 상세 죄회
     @Transactional(readOnly = true)
     public PostResponse getPostById(Long id) {
         return postRepository.findById(id)
@@ -101,6 +103,15 @@ public class PostService {
             }
             postPictureRepository.saveAll(pictures);
         }
+    }
+
+    // 좋아요 추가
+    public void likePost(Long postId) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new RuntimeException("게시물을 찾을 수 없습니다."));
+
+        post.incrementLikes(); // 좋아요 수 증가
+        postRepository.save(post); // 게시물 DB에 좋아요 수 반영
     }
 
 
