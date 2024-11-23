@@ -1,9 +1,8 @@
 package com.example.MapleArticles.dto.post.response;
 
-import com.example.MapleArticles.domain.post.Post;
-import com.example.MapleArticles.domain.user.User;
+import com.example.MapleArticles.domain.qna.QnA;
 
-public class PostResponse {
+public class QnAResponse {
     private long id;
     private String title;
     private String content;
@@ -12,7 +11,7 @@ public class PostResponse {
     private long likes;
     private long views;
 
-    public PostResponse(long id, String title, String content, long userId, String category, long likes, long views) {
+    public QnAResponse(long id, String title, String content, long userId, String category, long likes, long views) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -22,26 +21,25 @@ public class PostResponse {
         this.views = views;
     }
 
-    public PostResponse(Post post) {
-        this.id = post.getId();
-        this.title = post.getTitle();
-        this.content = post.getContent();
-        this.userId = post.getUserId();
-        this.category = post.getCategory();
-        this.likes = post.getLikes();
-        this.views = post.getViews();
+    public QnAResponse(QnA qna) {
+        this.id = qna.getId();
+        this.title = qna.getTitle();
+        this.content = qna.getContent();
+        this.userId = qna.getUserId();
+        this.category = qna.getCategory();
+        this.likes = qna.getLikes();
+        this.views = qna.getViews();
     }
 
-    public PostResponse(long id, Post post) {
+    public QnAResponse(long id, QnA qna) {
         this.id = id;
-        this.title = post.getTitle();
-        this.content = post.getContent();
-        this.userId = post.getUserId();
-        this.category = post.getCategory();
-        this.likes = post.getLikes();
-        this.views = post.getViews();
+        this.title = qna.getTitle();
+        this.content = qna.getContent();
+        this.userId = qna.getUserId();
+        this.category = qna.getCategory();
+        this.likes = qna.getLikes();
+        this.views = qna.getViews();
     }
-
 
     public long getId() {
         return id;

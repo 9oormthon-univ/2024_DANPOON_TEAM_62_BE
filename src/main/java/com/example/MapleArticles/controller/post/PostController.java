@@ -4,6 +4,7 @@ import com.example.MapleArticles.dto.post.request.PostCreateRequest;
 import com.example.MapleArticles.dto.post.request.PostUpdateRequest;
 import com.example.MapleArticles.dto.post.response.PostResponse;
 import com.example.MapleArticles.service.post.PostService;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,9 @@ public class PostController {
 
     @PostMapping("/post")
     public void savePost(@RequestBody PostCreateRequest request) {
+        //test
+        System.out.println("Request received: " + request);
+
         postService.savePost(request);
     }
 
@@ -34,14 +38,5 @@ public class PostController {
     @DeleteMapping("/post")
     public void deletePost(@RequestParam Long id) {
         postService.deletePost(id);
-    }
-
-    @GetMapping("/post/best")
-    public List<PostResponse> getBestPosts() {
-        return postService.getBestPosts();
-    }
-    @GetMapping("/post/latest")
-    public List<PostResponse> getLatestPosts() {
-        return postService.getLatestPosts();
     }
 }

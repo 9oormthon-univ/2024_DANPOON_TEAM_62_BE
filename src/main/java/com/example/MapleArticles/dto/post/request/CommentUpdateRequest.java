@@ -1,24 +1,24 @@
 package com.example.MapleArticles.dto.post.request;
 
-public class PostUpdateRequest {
+public class CommentUpdateRequest {
     private long id;
-    private String title;
     private String content;
-    private String category;
+    private long postId;
+    private long userId;
 
     public long getId() {
         return id;
     }
 
-    public String getTitle() { return title; }
-
     public String getContent() {
         return content;
     }
 
-    public String getCategory() {
-        return category;
+    public long getPostId() {
+        return postId;
     }
 
-
+    public long getUserId() {
+        return userId;
+    }
 }

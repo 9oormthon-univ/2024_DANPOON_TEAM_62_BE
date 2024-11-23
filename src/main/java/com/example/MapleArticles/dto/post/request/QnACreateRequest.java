@@ -1,12 +1,13 @@
 package com.example.MapleArticles.dto.post.request;
 
-public class PostCreateRequest {
+public class QnACreateRequest {
     private String title;
     private String content;
+    //private String comment;
     private long userId;
     private String category;
 
-    public PostCreateRequest(String title, String content, long userId, String category) {
+    public QnACreateRequest(String title, String content, long userId, String category) {
         this.title = title;
         this.content = content;
         this.userId = userId;
@@ -28,17 +29,4 @@ public class PostCreateRequest {
     public String getCategory() {
         return category;
     }
-
-
-    //test
-    @Override
-    public String toString() {
-        return "PostCreateRequest{" +
-                "title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", userId=" + userId +
-                ", category='" + category + '\'' +
-                '}';
-    }
-
 }

@@ -1,6 +1,6 @@
 package com.example.MapleArticles.dto.post.request;
 
-public class PostUpdateRequest {
+public class QnAUpdateRequest {
     private long id;
     private String title;
     private String content;
@@ -10,7 +10,9 @@ public class PostUpdateRequest {
         return id;
     }
 
-    public String getTitle() { return title; }
+    public String getTitle() {
+        return title;
+    }
 
     public String getContent() {
         return content;
@@ -19,6 +21,4 @@ public class PostUpdateRequest {
     public String getCategory() {
         return category;
     }
-
-
 }

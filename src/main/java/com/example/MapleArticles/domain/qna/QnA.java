@@ -1,16 +1,14 @@
-package com.example.MapleArticles.domain.post;
+package com.example.MapleArticles.domain.qna;
 
-import com.example.MapleArticles.domain.user.User;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Date;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class Post {
+public class QnA {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id = null;
@@ -18,14 +16,12 @@ public class Post {
     @Column(nullable = false, length = 255, name = "title")
     private String title;
 
-    @Column(nullable = false)
+    @Column
     private String content;
 
-    /*
-    @JoinColumn(nullable = false)
-    @ManyToOne
-    private User user;
-    */
+    //@Column
+    //private String comment;
+
     private long userId;
 
     private String category;
@@ -37,20 +33,15 @@ public class Post {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
-    @LastModifiedDate
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updatedAt;
+    protected QnA() {}
 
-
-    protected Post() {}
-
-    public Post(String title) {
+    public QnA(String title) {
         if(title == null || title.isBlank())
             throw new IllegalArgumentException("Title cannot be null or empty");
         this.title = title;
     }
 
-    public Post(String title, String content, long userId, String category) {
+    public QnA(String title, String content, long userId, String category) {
         this.title = title;
         this.content = content;
         this.userId = userId;
@@ -58,7 +49,6 @@ public class Post {
         this.likes = 0;
         this.views = 0;
         this.createdAt = new Date(System.currentTimeMillis());
-        this.updatedAt = createdAt;
     }
 
     public Long getId() {
@@ -73,12 +63,10 @@ public class Post {
         return content;
     }
 /*
-    public User getUser() {
-        return user;
+    public String getComment() {
+        return comment;
     }
-
  */
-
     public long getUserId() {
         return userId;
     }
@@ -99,43 +87,16 @@ public class Post {
         return createdAt;
     }
 
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
     public void updateTitle(String title) {
         this.title = title;
-        this.updatedAt = new Date(System.currentTimeMillis());
     }
 
     public void updateContent(String content) {
         this.content = content;
-        this.updatedAt = new Date(System.currentTimeMillis());
     }
 
     public void updateCategory(String category) {
         this.category = category;
-    }
-
-    public void updateUpadatedAt () {
-        this.updatedAt = new Date(System.currentTimeMillis());
-    }
-
-
-    //test
-    @Override
-    public String toString() {
-        return "Post{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", userId=" + userId +
-                ", category='" + category + '\'' +
-                ", likes=" + likes +
-                ", views=" + views +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                '}';
     }
 
 }
