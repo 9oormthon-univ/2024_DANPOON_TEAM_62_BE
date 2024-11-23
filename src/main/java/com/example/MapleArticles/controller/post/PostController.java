@@ -30,6 +30,11 @@ public class PostController {
         return postService.getPosts();
     }
 
+    @GetMapping("/post/{id}")
+    public PostResponse getPostById(@PathVariable Long id) {
+        return postService.getPostById(id);
+    }
+
     @PutMapping("/post")
     public void updatePost(@RequestBody PostUpdateRequest request) {
         postService.updatePost(request);

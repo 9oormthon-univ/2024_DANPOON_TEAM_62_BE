@@ -1,10 +1,13 @@
 package com.example.MapleArticles.dto.post.request;
 
+import java.util.List;
+
 public class PostCreateRequest {
     private String title;
     private String content;
     private long userId;
     private String category;
+    private List<byte[]> pictures;
 
     public PostCreateRequest(String title, String content, long userId, String category) {
         this.title = title;
@@ -29,6 +32,13 @@ public class PostCreateRequest {
         return category;
     }
 
+    public List<byte[]> getPictures() {
+        return pictures;
+    }
+
+    public void setPictures(List<byte[]> pictures) {
+        this.pictures = pictures;
+    }
 
     //test
     @Override

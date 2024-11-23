@@ -1,6 +1,8 @@
 package com.example.MapleArticles.service.post;
 
 import com.example.MapleArticles.domain.post.Post;
+import com.example.MapleArticles.domain.post.PostPicture;
+import com.example.MapleArticles.domain.post.PostPictureRepository;
 import com.example.MapleArticles.domain.post.PostRepository;
 import com.example.MapleArticles.domain.user.User;
 import com.example.MapleArticles.domain.user.UserRepository;
@@ -12,6 +14,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,12 +24,14 @@ import java.util.stream.Collectors;
 public class PostService {
 
     private final PostRepository postRepository;
+    private final PostPictureRepository postPictureRepository;
     private final UserRepository userRepository;
     private final PostJdbcRepository postJdbcRepository;
 
-    public PostService(PostRepository postRepository, UserRepository userRepository, @Qualifier("postJdbcRepository") PostJdbcRepository postJdbcRepository) {
+    public PostService(PostRepository postRepository, UserRepository userRepository, PostPictureRepository postPictureRepository, @Qualifier("postJdbcRepository") PostJdbcRepository postJdbcRepository) {
         this.postRepository = postRepository;
         this.userRepository = userRepository;
+        this.postPictureRepository = postPictureRepository;
         this.postJdbcRepository = postJdbcRepository;
     }
 
@@ -45,6 +52,15 @@ public class PostService {
         );
         System.out.println("Mapped Post object: " + post);
         postRepository.save(post);
+
+        if(request.getPictures() != null) {
+            List<PostPicture> pictures = new ArrayList<>();
+            for(byte[] pictureData : request.getPictures()) {
+                pictures.add(new PostPicture(post, pictureData));
+            }
+
+            postPictureRepository.saveAll(pictures);
+        }
     }
 
 
@@ -55,6 +71,13 @@ public class PostService {
         return posts.stream()
                 .map(PostResponse::new)
                 .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public PostResponse getPostById(Long id) {
+        return postRepository.findById(id)
+                .map(post -> new PostResponse(post))
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     //게시물 수정
@@ -69,6 +92,15 @@ public class PostService {
         post.updateUpadatedAt();
 
         postRepository.save(post);
+
+        if(request.getPictures() != null) {
+            postPictureRepository.deleteByPostId(post.getId());
+            List<PostPicture> pictures = new ArrayList<>();
+            for(byte[] pictureData : request.getPictures()) {
+                pictures.add(new PostPicture(post, pictureData));
+            }
+            postPictureRepository.saveAll(pictures);
+        }
     }
 
 
@@ -77,7 +109,7 @@ public class PostService {
     public void deletePost(Long id) {
         Post post = postRepository.findById(id)
                 .orElseThrow(IllegalArgumentException::new);
-
+        postPictureRepository.deleteByPostId(id);
         postRepository.delete(post);
     }
 }

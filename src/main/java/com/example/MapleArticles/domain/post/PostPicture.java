@@ -54,8 +54,4 @@ public class PostPicture {
     public Date getCreatedAt() {
         return createdAt;
     }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 }

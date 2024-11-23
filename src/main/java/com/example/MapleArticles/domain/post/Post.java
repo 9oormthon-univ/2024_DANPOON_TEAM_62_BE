@@ -6,7 +6,9 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -41,6 +43,8 @@ public class Post {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PostPicture> pictures = new ArrayList<>();
 
     protected Post() {}
 
@@ -101,6 +105,10 @@ public class Post {
 
     public Date getUpdatedAt() {
         return updatedAt;
+    }
+
+    public List<PostPicture> getPictures() {
+        return pictures;
     }
 
     public void updateTitle(String title) {
