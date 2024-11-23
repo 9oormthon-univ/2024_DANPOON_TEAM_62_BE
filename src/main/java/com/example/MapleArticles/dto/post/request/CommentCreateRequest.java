@@ -2,10 +2,11 @@ package com.example.MapleArticles.dto.post.request;
 
 public class CommentCreateRequest {
     private String content;
-    private long userId;
     private long postId;
+    private long userId;
 
-    public CommentCreateRequest(String content, long userId, long postId) {
+
+    public CommentCreateRequest(String content, long postId, long userId) {
         this.content = content;
         this.userId = userId;
         this.postId = postId;
