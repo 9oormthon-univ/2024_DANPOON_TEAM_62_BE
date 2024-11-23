@@ -8,6 +8,7 @@ public class PostCreateRequest {
     private long userId;
     private String category;
     private List<byte[]> pictures;
+    private List<String> pictureUrls;
 
     public PostCreateRequest(String title, String content, long userId, String category) {
         this.title = title;
@@ -36,8 +37,8 @@ public class PostCreateRequest {
         return pictures;
     }
 
-    public void setPictures(List<byte[]> pictures) {
-        this.pictures = pictures;
+    public List<String> getPictureUrls() {
+        return pictureUrls;
     }
 
     //test

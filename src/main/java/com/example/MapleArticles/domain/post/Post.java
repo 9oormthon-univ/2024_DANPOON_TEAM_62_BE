@@ -125,7 +125,7 @@ public class Post {
         this.category = category;
     }
 
-    public void updateUpadatedAt () {
+    public void updateUpdatedAt () {
         this.updatedAt = new Date(System.currentTimeMillis());
     }
 

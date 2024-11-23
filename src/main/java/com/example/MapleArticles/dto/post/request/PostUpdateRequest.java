@@ -8,6 +8,7 @@ public class PostUpdateRequest {
     private String content;
     private String category;
     private List<byte[]> pictures;
+    private List<String> picutreUrls;
 
     public long getId() {
         return id;
@@ -25,5 +26,9 @@ public class PostUpdateRequest {
 
     public List<byte[]> getPictures() {
         return pictures;
+    }
+
+    public List<String> getPicutreUrls() {
+        return picutreUrls;
     }
 }

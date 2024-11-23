@@ -5,7 +5,9 @@ import com.example.MapleArticles.domain.post.PostPicture;
 import com.example.MapleArticles.domain.user.User;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PostResponse {
     private long id;
@@ -15,7 +17,9 @@ public class PostResponse {
     private String category;
     private long likes;
     private long views;
-    private List<PostPicture> pictures = new ArrayList<>();
+    private List<byte[]> pictures;
+    //private List<String> pictures;
+    private List<String> pictureUrls;
 
     public PostResponse(long id, String title, String content, long userId, String category, long likes, long views) {
         this.id = id;
@@ -35,7 +39,31 @@ public class PostResponse {
         this.category = post.getCategory();
         this.likes = post.getLikes();
         this.views = post.getViews();
-        this.pictures = post.getPictures();
+        this.pictures = post.getPictures().stream()
+                .map(PostPicture::getPicture)
+                .collect(Collectors.toList());
+        this.pictureUrls = post.getPictures().stream()
+                .map(PostPicture::getPictureUrl)
+                .filter(url -> url != null && !url.isBlank())
+                .collect(Collectors.toList());
+/*
+        this.pictures = post.getPictures().stream()
+                .map(PostPicture::getPicture)
+                .map(Base64.getEncoder()::encodeToString) // Base64 인코딩
+                .collect(Collectors.toList());
+
+
+ */
+
+        // 사진 URL 초기화
+        this.pictureUrls = post.getPictures().stream()
+                .map(PostPicture::getPictureUrl)
+                .filter(url -> url != null && !url.isEmpty()) // null 체크
+                .collect(Collectors.toList());
+
+        System.out.println("Pictures: " + this.pictures);
+        System.out.println("Picture URLs: " + this.pictureUrls);
+
     }
 
     public PostResponse(long id, Post post) {
@@ -75,5 +103,13 @@ public class PostResponse {
 
     public long getViews() {
         return views;
+    }
+
+    public List<byte[]> getPictures() {
+        return pictures;
+    }
+
+    public List<String> getPictureUrls() {
+        return pictureUrls;
     }
 }

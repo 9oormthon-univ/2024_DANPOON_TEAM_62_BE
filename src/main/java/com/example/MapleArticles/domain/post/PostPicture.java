@@ -1,5 +1,6 @@
 package com.example.MapleArticles.domain.post;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -18,8 +19,12 @@ public class PostPicture {
     private Post post;
 
     @Lob
-    @Column(nullable = false)
+    @Basic(fetch = FetchType.EAGER)
+    @Column
     private byte[] picture;
+
+    @Column
+    private String pictureUrl;
 
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
@@ -39,6 +44,18 @@ public class PostPicture {
         this.createdAt = new Date(System.currentTimeMillis());
     }
 
+    public PostPicture(Post post, String pictureUrl) {
+        if (post == null) {
+            throw new IllegalArgumentException("Post cannot be null");
+        }
+        if (pictureUrl == null || pictureUrl.isBlank()) {
+            throw new IllegalArgumentException("Picture cannot be null or empty");
+        }
+        this.post = post;
+        this.pictureUrl = pictureUrl;
+        this.createdAt = new Date(System.currentTimeMillis());
+    }
+
     public Long getId() {
         return id;
     }
@@ -53,5 +70,9 @@ public class PostPicture {
 
     public Date getCreatedAt() {
         return createdAt;
+    }
+
+    public String getPictureUrl() {
+        return pictureUrl;
     }
 }

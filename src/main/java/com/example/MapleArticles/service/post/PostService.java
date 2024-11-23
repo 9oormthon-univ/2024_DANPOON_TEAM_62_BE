@@ -18,6 +18,7 @@ import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -61,6 +62,15 @@ public class PostService {
 
             postPictureRepository.saveAll(pictures);
         }
+
+        if(request.getPictureUrls() != null) {
+            List<PostPicture> pictures = new ArrayList<>();
+            for(String pictureUrl : request.getPictureUrls()) {
+                pictures.add(new PostPicture(post, pictureUrl));
+            }
+
+            postPictureRepository.saveAll(pictures);
+        }
     }
 
 
@@ -73,14 +83,24 @@ public class PostService {
                 .collect(Collectors.toList());
     }
 
-
-    //게시물 상세 죄회
+/*
+    //게시물 상세 조회
     @Transactional(readOnly = true)
     public PostResponse getPostById(Long id) {
         return postRepository.findById(id)
-                .map(post -> new PostResponse(post))
+                .map(PostResponse::new)
                 .orElseThrow(IllegalArgumentException::new);
     }
+
+
+ */
+    @Transactional(readOnly = true)
+    public PostResponse getPostById(Long id) {
+        return postRepository.findWithPicturesById(id)
+                .map(PostResponse::new)
+                .orElseThrow(() -> new IllegalArgumentException("Post not found"));
+    }
+
 
     //게시물 수정
     @Transactional
@@ -91,7 +111,7 @@ public class PostService {
         post.updateTitle(request.getTitle());
         post.updateContent(request.getContent());
         post.updateCategory(request.getCategory());
-        post.updateUpadatedAt();
+        post.updateUpdatedAt();
 
         postRepository.save(post);
 
@@ -100,6 +120,15 @@ public class PostService {
             List<PostPicture> pictures = new ArrayList<>();
             for(byte[] pictureData : request.getPictures()) {
                 pictures.add(new PostPicture(post, pictureData));
+            }
+            postPictureRepository.saveAll(pictures);
+        }
+
+        if(request.getPicutreUrls() != null) {
+            postPictureRepository.deleteByPostId(post.getId());
+            List<PostPicture> pictures = new ArrayList<>();
+            for(String pictureUrl : request.getPicutreUrls()) {
+                pictures.add(new PostPicture(post, pictureUrl));
             }
             postPictureRepository.saveAll(pictures);
         }
