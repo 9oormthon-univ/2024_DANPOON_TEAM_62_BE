@@ -1,6 +1,7 @@
 package com.example.MapleArticles.controller.comment;
 
 import com.example.MapleArticles.dto.post.request.CommentCreateRequest;
+import com.example.MapleArticles.dto.post.request.CommentLoadRequest;
 import com.example.MapleArticles.dto.post.request.CommentUpdateRequest;
 import com.example.MapleArticles.dto.post.response.CommentResponse;
 import com.example.MapleArticles.service.comment.CommentService;
@@ -22,8 +23,8 @@ public class CommentController {
     }
 
     @GetMapping("/comment")
-    public List<CommentResponse> getComments() {
-        return commentService.getComments();
+    public List<CommentResponse> getComments(@RequestParam long postId) {
+        return commentService.getComments(postId);
     }
 
     @PutMapping("/comment")

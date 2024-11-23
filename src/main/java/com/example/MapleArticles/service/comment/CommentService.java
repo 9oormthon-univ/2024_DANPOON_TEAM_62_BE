@@ -3,6 +3,7 @@ package com.example.MapleArticles.service.comment;
 import com.example.MapleArticles.domain.comment.Comment;
 import com.example.MapleArticles.domain.comment.CommentRepository;
 import com.example.MapleArticles.dto.post.request.CommentCreateRequest;
+import com.example.MapleArticles.dto.post.request.CommentLoadRequest;
 import com.example.MapleArticles.dto.post.request.CommentUpdateRequest;
 import com.example.MapleArticles.dto.post.response.CommentResponse;
 import com.example.MapleArticles.repository.comment.CommentJdbcRepository;
@@ -30,8 +31,8 @@ public class CommentService {
     }
 
     @Transactional(readOnly = true)
-    public List<CommentResponse> getComments() {
-        List<Comment> comments = commentRepository.findAll();
+    public List<CommentResponse> getComments(long id) {
+        List<Comment> comments = commentRepository.findByPostId(id);
         return comments.stream()
                 .map(CommentResponse::new)
                 .collect(Collectors.toList());
